@@ -1,0 +1,15 @@
+[package]
+authors = ["Piotr Grabowski <fau999@gmail.com>"]
+edition = "2018"
+name = "kindle-hl2fr"
+version = "0.2.0"
+
+[dependencies]
+chrono = "0.4"
+custom_error = "1.8"
+itertools = "0.10"
+lazy_static = "1.4"
+regex = "1.4"
+serde = {version = "1.0", features = ["derive"]}
+serde_json = "1.0"
+strum = {version = "0.20", features = ["derive"]}
