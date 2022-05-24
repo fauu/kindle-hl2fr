@@ -1,29 +1,31 @@
 # kindle-hl2fr
 
-> Convert Kindle highlights to Org or JSON.
+> Convert Kindle highlights to Org or JSON
 
 Parses Kindle `My Clippings.txt` file and prints deduplicated and sorted highlights from selected documents either in the Org format (quote blocks) or in JSON. A convenience shell script is included that uses [fzf](https://github.com/junegunn/fzf/) to streamline the process of document selection.
 
-`kindle-hl2fr` is only meant to support the author’s particular use case. If you are looking for a more broad solution, try e.g. [Fyodor](https://github.com/rccavalcanti/fyodor/). Binaries are not provided.
+`kindle-hl2fr` is only meant to support the author’s particular use case. If you are looking for a more broad solution, try e.g. [Fyodor](https://github.com/rccavalcanti/fyodor/).
+
+Binaries are not provided.
+
+## Table of contents
 
 - [Usage](#usage)
-  - [Direct usage](#direct-usage)
-- [Building](#building)
-- [Configuration](#configuration)
+- [Installation](#installation)
+- [Setup](#setup)
 - [License](#license)
 
 ## Usage
 
-See [Building](#building) and [Configuration](#configuration) first.
+(This presupposes steps specified in [Installation](#installation) and [Configuration](#configuration).)
 
-Execute the convenience script passing the path to your Kindle `My Clippings.txt` as an argument:
+Execute the convenience script passing the path to your `My Clippings.txt` as an argument:
 
 ````
 $ hl2fr.sh "./examples/My Clippings.txt"
-
 ````
 
-`fzf` will present a list of document titles present in the file. Select either just one of them by navigating to its list entry and pressing `Enter` or multiple ones by marking them with `Tab` and then pressing `Enter` to confirm. The highlights from selected documents should be printed to `stdout`.
+`fzf` will display a list of document titles present in the file. Select either just one of them by navigating to its list entry and pressing `Enter` or multiple ones by marking them with `Tab` and then pressing `Enter` to confirm. The highlights from selected documents should be printed to `stdout`.
 
 ### Direct usage
 
@@ -33,7 +35,7 @@ $ kindle-hl2fr
 Usage: kindle-hl2fr <My Clippings file> {{org|json}} [Document titles]
 ````
 
-Running with only the first argument will simply return titles of all documents that have entries in the given file:
+Running with only the first argument will return titles of all documents that have entries in the specified file:
 
 ````
 $ kindle-hl2fr "./examples/My Clippings.txt"
@@ -43,7 +45,7 @@ Nienasycenie (Witkiewicz, Stanisław Ignacy)
 Old Man Goriot (Balzac, Honoré de)
 ````
 
-The second and third arguments are for the highlight printing mode. The second argument specifies the desired output format and the third specifies the document titles for which to print the highlights:
+The second and third arguments are for the actual highlight printing mode. The second argument specifies the desired output format and the third specifies the titles of the documents whose highlights should be printed:
 
 ````
 $ echo -e "La Possibilité d'une île (Houellebecq, Michel)\nOld Man Goriot (Balzac, Honoré de)" | xargs -0 kindle-hl2fr "./examples/My Clippings.txt" "org"
@@ -59,7 +61,7 @@ This is a highlight.
 #+end_quote
 ````
 
-The Org formatter performs some additional formatting of the content of the highlight:
+The Org formatter performs some additional modifications of the highlight’s content:
 
 ````
 $ kindle-hl2fr "./examples/My Clippings.txt" "org" "Nienasycenie (Witkiewicz, Stanisław Ignacy)"
@@ -87,7 +89,7 @@ note>
 …
 ````
 
-Compare this with the content of [/examples/My Clippings.txt](/examples/My%20Clippings.txt).
+Compare the above with the content of [`/examples/My Clippings.txt`](/examples/My%20Clippings.txt).
 
 
 JSON output example:
@@ -125,7 +127,7 @@ $ echo -e "La Possibilité d'une île (Houellebecq, Michel)\nOld Man Goriot (Bal
 ]
 ````
 
-## Building
+## Installation
 
 Requirements:
 
@@ -137,7 +139,7 @@ Run:
 $ cargo install --git "https://github.com/fauu/kindle-hl2fr"
 ````
 
-or if installing from within the cloned repository directory:
+or, if installing from within the cloned repository directory:
 
 ````
 $ cargo install --path .
@@ -151,9 +153,7 @@ $ cargo install --help
 
 ## Setup
 
-Install [fzf](https://github.com/junegunn/fzf/), which is a dependency to the convenience script.
-
-Make `scripts/hl2fr.sh` executable and set the variable `kindle_hl2fr_path` inside it to reflect the path of the `kindle-hl2fr` executable file built earlier. If you need JSON rather than Org output, modify the `output_format` variable as well.
+If you wish to use the convenience script, install [fzf](https://github.com/junegunn/fzf/), make `scripts/hl2fr.sh` executable and set the variable `kindle_hl2fr_path` inside it to reflect the path of the `kindle-hl2fr` executable file built during installation. If you need JSON rather than Org output, modify the `output_format` variable as well.
 
 ## License
 
